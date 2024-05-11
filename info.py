@@ -51,7 +51,7 @@ DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in enviro
 
 # MongoDB information
 DATABASE_URI = environ.get('DATABASE_URI', "")
-DATABASE_NAME = environ.get('DATABASE_NAME', "Mastermind")
+DATABASE_NAME = environ.get('DATABASE_NAME', "MASTERMIND")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'not_anime_search_bot')
 
 # Premium And Referal Settings
