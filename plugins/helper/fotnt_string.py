@@ -1,6 +1,12 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
+# (C) Copyright 2024 Mastermind Mayank, Noobs of Telegram
+# 
+# All rights reserved. Do not copy without permission.
+# 
+# This code has been edited and updated by Mastermind Mayank of Noobs of Telegram.
+# 
+# GitHub: https://github.com/mastermindmayankofficial
+# Telegram: https://t.me/aboutmastermindmayank/100
+# Telegram Channel: https://t.me/NOT_UPDATES
 
 
 class Fonts:
@@ -330,7 +336,7 @@ class Fonts:
             'g': 'ɢ',
             'h': 'ʜ',
             'i': 'ɪ',
-            'j': 'ɪ',
+            'j': 'ᴊ',
             'k': 'ᴋ',
             'l': 'ʟ',
             'm': 'ᴍ',
@@ -347,32 +353,32 @@ class Fonts:
             'x': 'x',
             'y': 'ʏ',
             'z': 'ᴢ',
-            'A': 'A',
-            'B': 'B',
-            'C': 'C',
-            'D': 'D',
-            'E': 'E',
-            'F': 'F',
-            'G': 'G',
-            'H': 'H',
-            'I': 'I',
-            'J': 'J',
-            'K': 'K',
-            'L': 'L',
-            'M': 'M',
-            'N': 'N',
-            'O': 'O',
-            'P': 'P',
-            'Q': 'Q',
-            'R': 'R',
-            'S': 'S',
-            'T': 'T',
-            'U': 'U',
-            'V': 'V',
-            'W': 'W',
-            'X': 'X',
-            'Y': 'Y',
-            'Z': 'Z',
+            'A': 'ᴀ',
+            'B': 'ʙ',
+            'C': 'ᴄ',
+            'D': 'ᴅ',
+            'E': 'ᴇ',
+            'F': 'ғ',
+            'G': 'ɢ',
+            'H': 'ʜ',
+            'I': 'ɪ',
+            'J': 'ᴊ',
+            'K': 'ᴋ',
+            'L': 'ʟ',
+            'M': 'ᴍ',
+            'N': 'ɴ',
+            'O': 'ᴏ',
+            'P': 'ᴘ',
+            'Q': 'ǫ',
+            'R': 'ʀ',
+            'S': 's',  # keep 'S' as it is
+            'T': 'ᴛ',
+            'U': 'ᴜ',
+            'V': 'ᴠ',
+            'W': 'ᴡ',
+            'X': 'x',  # keep 'X' as it is
+            'Y': 'ʏ',
+            'Z': 'ᴢ',
             '0': '𝟶',
             '1': '𝟷',
             '2': '𝟸',
