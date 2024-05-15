@@ -13,7 +13,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import *
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id, get_bad_files
 from database.users_chats_db import db
-from info import CHANNELS, ADMINS, STREAM_MODE, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, CHNL_LNK, GRP_LNK, REQST_CHANNEL, SUPPORT_CHAT_ID, SUPPORT_CHAT, MAX_B_TN, SHORTLINK_API, SHORTLINK_URL, URL
+from info import SEARCH_GROUP, CHANNELS, ADMINS, STREAM_MODE, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, CHNL_LNK, GRP_LNK, REQST_CHANNEL, SUPPORT_CHAT_ID, SUPPORT_CHAT, MAX_B_TN, SHORTLINK_API, SHORTLINK_URL, URL
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re, asyncio, os, sys
@@ -54,31 +54,26 @@ async def start(client, message):
         )
         await asyncio.sleep(2)
         if not await db.get_chat(message.chat.id):
-            total = await client.get_chat_members_count(message.chat.id)
-            await client.send_message(
-                LOG_CHANNEL,
-                script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown")
-            )
+            total=await client.get_chat_members_count(message.chat.id)
+            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
             await db.add_chat(message.chat.id, message.chat.title)
-        return
-
+        return 
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(
-            LOG_CHANNEL,
-            script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention)
-        )
-
-    if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
+    if len(message.command) != 2:
         buttons = [[
             InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-        ],[
-            InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
-            InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
-        ],[
+            ],[
+            InlineKeyboardButton('🔎 sᴇᴀʀᴄʜ ʜᴇʀᴇ', switch_inline_query_current_chat=''),
+            InlineKeyboardButton('📢 ᴜᴘᴅᴀᴛᴇs', url='https://t.me/mf_linkz')
+            ],[
             InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('⍟ Aʙᴏᴜᴛ', callback_data='about')
-        ],[
+            ],[
+            InlineKeyboardButton('⚠️ ʜᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('⚙️ ᴀʙᴏᴜᴛ', callback_data='about')
+            ],[
             InlineKeyboardButton('✇ Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇', url=CHNL_LNK)
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -96,7 +91,7 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ],[
-            InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
+            InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', url=f"{SEARCH_GROUP}"),
             InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
         ],[
             InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
