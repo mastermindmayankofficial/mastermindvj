@@ -394,17 +394,33 @@ elif data.startswith("files"):
             filetype = msg.media
             file = getattr(msg, filetype.value)
             title = '@not_updates  ' + ' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), file.file_name.split()))
-            size=get_size(file.file_size)
+            size = get_size(file.file_size)
             f_caption = f"<code>{title}</code>"
             if CUSTOM_FILE_CAPTION:
                 try:
-                    f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
+                    f_caption = CUSTOM_FILE_CAPTION.format(
+                        file_name='' if title is None else title,
+                        file_size='' if size is None else size,
+                        file_caption=''
+                    )
                 except:
                     return
             await msg.edit_caption(
                 caption=f_caption,
                 reply_markup=InlineKeyboardMarkup(button)
-
+            )
+            btn = [[InlineKeyboardButton("Get File Again", callback_data=f'delfile#{file_id}')]]
+            k = await msg.reply(
+                "<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>10 mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</i></b>",
+                quote=True
+            )
+            await asyncio.sleep(600)
+            await msg.delete()
+            await k.edit_text(
+                "<b>Your File/Video is successfully deleted!!!\n\nClick below button to get your deleted file 👇</b>",
+                reply_markup=InlineKeyboardMarkup(btn)
+            )
+            return
             filetype = msg.media
             file = getattr(msg, filetype.value)
             title = '@not_updates  ' + ' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), file.file_name.split()))
