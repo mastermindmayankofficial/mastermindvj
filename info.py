@@ -62,7 +62,7 @@ REFERAL_COUNT = int(environ.get('REFERAL_COUNT', '20')) # number of referal coun
 REFERAL_PREMEIUM_TIME = environ.get('REFERAL_PREMEIUM_TIME', '1month')
 PAYMENT_QR = environ.get('PAYMENT_QR', 'https://graph.org/file/55749b0d3eaee3a5b958b.jpg')
 PAYMENT_TEXT = environ.get('PAYMENT_TEXT', 'everything is free if anyone ask money report to @notqf')
-OWNER_USERNAME = environ.get('OWNER_USERNAME', 'BrokenVR_not') # owner username without @
+
 
 # Links
 GRP_LNK = environ.get('GRP_LNK', 'https://t.me/request_manga_anime_hentai_not')
