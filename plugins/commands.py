@@ -70,23 +70,41 @@ async def start(client, message):
             script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention)
         )
 
-    if len(message.command) != 2:
-        buttons = [
-            [
-                InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],
-            [
-                InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
-                InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
-            ],
-            [
-                InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
-                InlineKeyboardButton('⍟ Aʙᴏᴜᴛ', callback_data='about')
-            ],
-            [
-                InlineKeyboardButton('✇ Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇', url=CHNL_LNK)
-            ]
-        ]
+    if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+        buttons = [[
+            InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+        ],[
+            InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
+            InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
+        ],[
+            InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('⍟ Aʙᴏᴜᴛ', callback_data='about')
+        ],[
+            InlineKeyboardButton('✇ Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇', url=CHNL_LNK)
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+        return
+
+    data = message.command[1]
+    if data.split("-", 1)[0] == "VJ":
+        user_id = int(data.split("-", 1)[1])
+        buttons = [[
+            InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+        ],[
+            InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
+            InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
+        ],[
+            InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('⍟ Aʙᴏᴜᴛ', callback_data='about')
+        ],[
+            InlineKeyboardButton('✇ Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇', url=CHNL_LNK)
+        ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         m = await message.reply_sticker("CAACAgUAAxkBAAEKVaxlCWGs1Ri6ti45xliLiUeweCnu4AACBAADwSQxMYnlHW4Ls8gQMAQ")
         await asyncio.sleep(1)
@@ -128,53 +146,6 @@ async def start(client, message):
         )
         return
 
-if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
-    buttons = [[
-        InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-    ],[
-        InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
-        InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
-    ],[
-        InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
-        InlineKeyboardButton('⍟ Aʙᴏᴜᴛ', callback_data='about')
-    ],[
-        InlineKeyboardButton('✇ Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇', url=CHNL_LNK)
-    ]]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await message.reply_photo(
-        photo=random.choice(PICS),
-        caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML
-    )
-    return
-
-data = message.command[1]
-if data.split("-", 1)[0] == "VJ":
-    user_id = int(data.split("-", 1)[1])
-    buttons = [[
-        InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-    ],[
-        InlineKeyboardButton('sᴇᴀʀᴄʜ ɢʀᴏᴜᴘs', callback_data="shortlink_info"),
-        InlineKeyboardButton('⌬ Mᴏᴠɪᴇ Gʀᴏᴜᴘ', url=GRP_LNK)
-    ],[
-        InlineKeyboardButton('〄 Hᴇʟᴘ', callback_data='help'),
-        InlineKeyboardButton('⍟ Aʙᴏᴜᴛ', callback_data='about')
-    ],[
-        InlineKeyboardButton('✇ Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇', url=CHNL_LNK)
-    ]]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    m = await message.reply_sticker("CAACAgUAAxkBAAEKVaxlCWGs1Ri6ti45xliLiUeweCnu4AACBAADwSQxMYnlHW4Ls8gQMAQ")
-    await asyncio.sleep(1)
-    await m.delete()
-    await message.reply_photo(
-        photo=random.choice(PICS),
-        caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML
-    )
-    return
-
     try:
         pre, file_id = data.split('_', 1)
     except:
@@ -188,7 +159,7 @@ if data.split("-", 1)[0] == "VJ":
             file = await client.download_media(file_id)
             try: 
                 with open(file) as file_data:
-                    msgs=json.loads(file_data.read())
+                    msgs = json.loads(file_data.read())
             except:
                 await sts.edit("FAILED")
                 return await client.send_message(LOG_CHANNEL, "UNABLE TO OPEN FILE.")
@@ -198,21 +169,20 @@ if data.split("-", 1)[0] == "VJ":
         filesarr = []
         for msg in msgs:
             title = msg.get("title")
-            size=get_size(int(msg.get("size", 0)))
-            f_caption=msg.get("caption", "")
+            size = get_size(int(msg.get("size", 0)))
+            f_caption = msg.get("caption", "")
             if BATCH_FILE_CAPTION:
                 try:
-                    f_caption=BATCH_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='' if f_caption is None else f_caption)
+                    f_caption = BATCH_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='' if f_caption is None else f_caption)
                 except Exception as e:
                     logger.exception(e)
-                    f_caption=f_caption
+                    f_caption = f_caption
             if f_caption is None:
                 f_caption = f"{title}"
             try:
                 if STREAM_MODE == True:
-                    # Create the inline keyboard button with callback_data
                     user_id = message.from_user.id
-                    username =  message.from_user.mention 
+                    username = message.from_user.mention 
 
                     log_msg = await client.send_cached_media(
                         chat_id=LOG_CHANNEL,
@@ -229,6 +199,7 @@ if data.split("-", 1)[0] == "VJ":
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🚀 Fast Download 🚀", url=download),  # we download Link
                                                             InlineKeyboardButton('🖥️ Watch online 🖥️', url=stream)]])  # web stream Link
                     )
+
                 if STREAM_MODE == True:
                     button = [[
                         InlineKeyboardButton('Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ', url=f'https://t.me/{SUPPORT_CHAT}'),
