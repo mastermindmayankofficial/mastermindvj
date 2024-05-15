@@ -357,14 +357,13 @@ elif data.startswith("all"):
     await k.edit_text("<b>Your All Files/Videos is successfully deleted!!!</b>")
     return
 
-        
-    elif data.startswith("files"):
-        user = message.from_user.id
-        if temp.SHORT.get(user)==None:
-            await message.reply_text(text="<b>Please Search Again in Group</b>")
-        else:
-            chat_id = temp.SHORT.get(user)
-        settings = await get_settings(chat_id)
+elif data.startswith("files"):
+    user = message.from_user.id
+    if temp.SHORT.get(user)==None:
+        await message.reply_text(text="<b>Please Search Again in Group</b>")
+    else:
+        chat_id = temp.SHORT.get(user)
+    settings = await get_settings(chat_id)
     user = message.from_user.id
     files_ = await get_file_details(file_id)           
     if not files_:
@@ -392,6 +391,20 @@ elif data.startswith("all"):
                 protect_content=True if pre == 'filep' else False,
                 reply_markup=InlineKeyboardMarkup(button)
             )
+            filetype = msg.media
+            file = getattr(msg, filetype.value)
+            title = '@not_updates  ' + ' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), file.file_name.split()))
+            size=get_size(file.file_size)
+            f_caption = f"<code>{title}</code>"
+            if CUSTOM_FILE_CAPTION:
+                try:
+                    f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
+                except:
+                    return
+            await msg.edit_caption(
+                caption=f_caption,
+                reply_markup=InlineKeyboardMarkup(button)
+
             filetype = msg.media
             file = getattr(msg, filetype.value)
             title = '@not_updates  ' + ' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), file.file_name.split()))
